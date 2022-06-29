@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 use GuzzleHttp\Client as httpClient;
+use Illuminate\Database\Eloquent\Collection;
+use Seld\JsonLint\JsonParser;
 require_once "simplehtmldom/simplehtmldom.php";
 
 class Home extends BaseController
@@ -41,7 +43,7 @@ class Home extends BaseController
       $isi = $shtml->find('p.dfx-singleForecastBlock__articleTeaser', $i)->plaintext;
       $tgl = $shtml->find('p.dfx-singleForecastBlock__articleDate', $i)->plaintext;
       $link = $shtml->find('a.dfx-readMoreButton', $i)->getAttribute('href');
-      $result[] = [
+      $forecastdfx[] = [
         'curr' => $curr,
         'judul' => $judul,
         'isi' => $isi,
@@ -49,8 +51,11 @@ class Home extends BaseController
         'link' => $link,
       ];
     }
+    $fxf[] = [
+      'fore_ovw' => $forecastdfx,
+      ];
     echo "<pre>";
-    echo json_encode($result, JSON_PRETTY_PRINT);
+    echo json_encode($fxf, JSON_PRETTY_PRINT);
   }
 
   public function analyst() {
@@ -74,6 +79,7 @@ class Home extends BaseController
     echo "<pre>";
     echo json_encode($result_a, JSON_PRETTY_PRINT);
   }
+  
   public function forex_rates ($pair) {
     header('Access-Control-Allow-Origin: *');
     header("Content-Type: application/json;charset=utf-8");
@@ -93,5 +99,45 @@ class Home extends BaseController
       ];
     echo "<pre>";
     echo json_encode($result_fr, JSON_PRETTY_PRINT);
+  }
+  public function forex_interest () {
+  header('Access-Control-Allow-Origin: *');
+  header("Content-Type: application/json;charset=utf-8");
+    $client = new httpClient();
+    $urlfx = "https://www.fxstreet.com/economic-calendar/world-interest-rates";
+   $wint = $client->request('GET', $urlfx);
+   $rhtml = str_get_html($wint->getBody());
+   
+   $urlfx = "https://www.fxstreet.com/economic-calendar/world-interest-rates";
+   $wint = $client->request('GET', $urlfx);
+   $rhtml = str_get_html($wint->getBody());
+    for ($i = 0; $i < 17; $i++) {
+   $judul = $rhtml->find('h3.fxs_entryHeadline a', $i)->plaintext;
+   $nama = "";
+   $tgl = "";
+   $link = $rhtml->find('h3.fxs_entryHeadline a', $i)->getAttribute('href');
+   $isi = "test";
+   $jmp = $client->request('GET', $link);
+   $jhtml = str_get_html($jmp->getBody());
+   $m_react = $jhtml->find('p', 8)->plaintext;
+   $q1 =  $jhtml->find('p', 1)->plaintext;
+   $q2 =  $jhtml->find('p', 2)->plaintext;
+   $q3 =  $jhtml->find('p', 3)->plaintext;
+   $q4 =  $jhtml->find('p', 4)->plaintext;
+   $fx_int[] = [
+     'judul' => $judul,
+     'isi_art' => $isi,
+     'quote' => [
+        'q1' => $q1,
+         'q2' => $q2,
+          'q3' => $q3,
+           'q4' => $q4,
+        ],
+     'link' => $link,
+     'market_reaction' => $m_react,
+     ];
+    }
+    echo "<pre>";
+   echo json_encode($fx_int, JSON_PRETTY_PRINT);
   }
 }
