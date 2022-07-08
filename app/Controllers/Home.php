@@ -100,14 +100,28 @@ class Home extends BaseController
     echo "<pre>";
     echo json_encode($result_fr, JSON_PRETTY_PRINT);
   }
-  public function forex_interest () {
-  header('Access-Control-Allow-Origin: *');
-  header("Content-Type: application/json;charset=utf-8");
-    $client = new httpClient();
-    $urlfx = "https://www.fxstreet.com/economic-calendar/world-interest-rates";
-   $wint = $client->request('GET', $urlfx);
-   $rhtml = str_get_html($wint->getBody());
+  public function fx_liquidity(){
+  $client = new httpClient();
+   $url = "https://www.myfxbook.com/forex-market/liquidity";
+   $wint = $client->request('GET', $url);
+   $html = str_get_html($wint->getBody());
    
+   $c_liquid = $html->find('#currentLiquidity',0)->plaintext;
+   $avg_liq = $html->find('#liquidityAverageBetweenDates',0)->plaintext;
+   
+   $result = array(
+     'current_liq' => $c_liquid,
+     'avg_liquid' => $avg_liq,
+     );
+   echo "<pre>";
+   echo json_encode($result, JSON_PRETTY_PRINT);
+   
+  }
+  
+  
+  public function forex_interest () {
+  
+   $client = new httpClient();
    $urlfx = "https://www.fxstreet.com/economic-calendar/world-interest-rates";
    $wint = $client->request('GET', $urlfx);
    $rhtml = str_get_html($wint->getBody());
@@ -119,25 +133,19 @@ class Home extends BaseController
    $isi = "test";
    $jmp = $client->request('GET', $link);
    $jhtml = str_get_html($jmp->getBody());
-   $m_react = $jhtml->find('p', 8)->plaintext;
-   $q1 =  $jhtml->find('p', 1)->plaintext;
-   $q2 =  $jhtml->find('p', 2)->plaintext;
-   $q3 =  $jhtml->find('p', 3)->plaintext;
-   $q4 =  $jhtml->find('p', 4)->plaintext;
-   $fx_int[] = [
+   $art = $jhtml->find('div.fxs_article_content', 0)->plaintext;
+   $fx_int[] = array(
      'judul' => $judul,
-     'isi_art' => $isi,
-     'quote' => [
-        'q1' => $q1,
-         'q2' => $q2,
-          'q3' => $q3,
-           'q4' => $q4,
-        ],
      'link' => $link,
-     'market_reaction' => $m_react,
-     ];
+     'artikel' => $art,
+     );
     }
+   
+    $dts = array(
+      'art' => $fx_int,
+      );
+
     echo "<pre>";
-   echo json_encode($fx_int, JSON_PRETTY_PRINT);
+    echo json_encode($dts, JSON_PRETTY_PRINT);
   }
 }

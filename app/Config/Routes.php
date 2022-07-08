@@ -42,6 +42,7 @@ $routes->get('/forecast', 'Home::forecast');
 $routes->get('/analyst', 'Home::analyst');
 $routes->get('/fx_interest', 'Home::forex_interest');
 $routes->get('/forex_rates/(:any)', 'Home::forex_rates/$1');
+$routes->get('/fx_liquidity/', 'Home::fx_liquidity');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
