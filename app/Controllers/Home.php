@@ -8,7 +8,7 @@ require_once "simplehtmldom/simplehtmldom.php";
 class Home extends BaseController
 {
   public function index() {
-    return view('welcome_message');
+    return view('hterm');
   }
   public function crypto() {
     echo "Data Crypto<br>";
