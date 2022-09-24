@@ -21,7 +21,7 @@ const App = () => {
 const Terminal = ({ theme, setTheme }) => {
   const [maximized, setMaximized] = React.useState(false);
   const [title, setTitle] = React.useState('R18 Terminal');
-  const handleClose = () => window.location.href = 'https://codepen.io/HuntingHawk';
+  const handleClose = () => window.location.href = '';
   const handleMinMax = () => {
     setMaximized(!maximized);
     document.querySelector('#field').focus();
