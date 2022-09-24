@@ -22,7 +22,7 @@ class Home extends BaseController
     $context = stream_context_create($options);
     $client = new httpClient();
     $destdir = 'imgprv/';
-    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=1');
+    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=2');
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
       $namev = $shtml->find('div.txt01', $i)->plaintext;
@@ -34,8 +34,8 @@ class Home extends BaseController
         'imgprview' => $imgprvs,
       ];
 
-      // $img = file_get_contents($imgprvs, false, $context);
-      // file_put_contents($destdir.substr($imgprv, strrpos($imgprv,'/')), $img);
+      $img = file_get_contents($imgprvs, false, $context);
+      file_put_contents($destdir.substr($imgprv, strrpos($imgprv,'/')), $img);
     }
     $fxf[] = [
       'actress' => $aktris,
