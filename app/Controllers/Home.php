@@ -11,7 +11,7 @@ class Home extends BaseController
     return view('hterm');
   }
   public function limit_time(){
-    $page ="2";
+    $page ="1";
     $options = array(
       'http'=>array(
         'method'=>"GET",
@@ -26,7 +26,7 @@ class Home extends BaseController
     if(!file_exists($destdir)){
       mkdir($destdir);
     }
-    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/list/?id=6565&type=category?page='.$page);
+    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/list/?id=6565&type=category&page='.$page);
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
       // $namev = $shtml->find('li.item-list is-sale', $i)->plaintext;
