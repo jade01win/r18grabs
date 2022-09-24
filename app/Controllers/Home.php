@@ -12,7 +12,7 @@ class Home extends BaseController
   }
   public function actress(){
     $client = new httpClient();
-    $destdir = '/imgprv';
+    $destdir = 'imgprv/';
     $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=1');
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
