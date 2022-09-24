@@ -34,7 +34,7 @@ class Home extends BaseController
       // $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
       // $imgprv = str_replace(array("https://",""), 'http://', $imgprvs);
       $linkvod = $shtml->find('a.i3NLink', $i)->href;
-      $lingvod = urlencode(str_replace(array("/",""), '/', $linkvod));
+      $lingvod = urlencode(str_replace(array("//",""), '/', $linkvod));
       $limit[] = [
         // 'name' => $name,
         // 'imgprview' => $imgprvs,
