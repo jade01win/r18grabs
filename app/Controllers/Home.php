@@ -10,8 +10,8 @@ class Home extends BaseController
   public function index() {
     return view('hterm');
   }
-  public function actress(){
-    $page ="3";
+  public function limit_time(){
+    $page ="1";
     $options = array(
       'http'=>array(
         'method'=>"GET",
@@ -26,31 +26,27 @@ class Home extends BaseController
     if(!file_exists($destdir)){
       mkdir($destdir);
     }
-    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page='.$page);
+    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/list/?id=6565&type=category?page='.$page);
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
-      $namev = $shtml->find('div.txt01', $i)->plaintext;
-      $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
-      $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
-      $imgprv = str_replace(array("https://",""), 'http://', $imgprvs);
-      $linkact = $shtml->find('ul.cmn-list-product03 li a', $i)->href;
-      $aktris[] = [
-        'name' => $name,
-        'imgprview' => $imgprvs,
-        'linkact' => $linkact,
+      // $namev = $shtml->find('li.item-list is-sale', $i)->plaintext;
+      // $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
+      // $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
+      // $imgprv = str_replace(array("https://",""), 'http://', $imgprvs);
+      $linkvod = $shtml->find('a.i3NLink', $i)->href;
+      $limit[] = [
+        // 'name' => $name,
+        // 'imgprview' => $imgprvs,
+        'linkvod' => $linkvod,
       ];
 
-      $img = file_get_contents($imgprvs, true, $context);
-      file_put_contents($destdir.substr($imgprvs, strrpos($imgprvs,'/')), $img);
+      // $img = file_get_contents($imgprvs, true, $context);
+      // file_put_contents($destdir.substr($imgprvs, strrpos($imgprvs,'/')), $img);
     }
     $fxf[] = [
-      'actress' => $aktris,
+      'limit_sale' => $limit,
       ];
     echo "<pre>";
     echo json_encode($fxf, JSON_PRETTY_PRINT);
-  }
-
-  public function limit_time(){
-    
   }
 }
