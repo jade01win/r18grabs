@@ -28,7 +28,7 @@ class Home extends BaseController
     }
     $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/list/?id=6565&type=category&page='.$page);
     $shtml = str_get_html($res->getBody());
-    for ($i = 1; $i < 30; $i++) {
+    for ($i = 1; $i < 60; $i++) {
       // $namev = $shtml->find('li.item-list is-sale', $i)->plaintext;
       // $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
       // $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
