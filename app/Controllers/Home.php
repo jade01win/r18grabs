@@ -24,7 +24,8 @@ class Home extends BaseController
         'name' => $name,
         'imgprview' => $imgprv,
       ];
-      $img=file_get_contents("https://images.pexels.com/photos/2693212/pexels-photo-2693212.png");
+      $link = "https://images.pexels.com/photos/2693212/pexels-photo-2693212.png";
+      $img=file_get_contents($link);
       file_put_contents($destdir.substr($link, strrpos($link,'/')), $img);
     }
     $fxf[] = [
