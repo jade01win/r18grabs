@@ -43,7 +43,7 @@ class Field extends React.Component {
     this.state = {
       commandHistory: [],
       commandHistoryIndex: 0,
-      fieldHistory: [{ text: 'React Terminal' }, { text: 'Type HELP to see the full list of commands.', hasBuffer: true }],
+      fieldHistory: [{ text: 'R18 Terminal' }, { text: 'Type HELP to see the full list of commands.', hasBuffer: true }],
       userInput: '',
       isMobile: false };
 
@@ -124,7 +124,7 @@ class Field extends React.Component {
 
     {
       command: 'title',
-      purpose: 'Sets the window title for the React Terminal.',
+      purpose: 'Sets the window title for the R18 Terminal.',
       help: [
       'TITLE <INPUT>',
       'Sets the window title for the React Terminal.',

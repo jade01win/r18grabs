@@ -10,6 +10,24 @@ class Home extends BaseController
   public function index() {
     return view('hterm');
   }
+  public function actress(){
+    header('Access-Control-Allow-Origin: *');
+    header("Content-Type: application/json;charset=utf-8");
+    $client = new httpClient();
+    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=1');
+    $shtml = str_get_html($res->getBody());
+    for ($i = 0; $i < 30; $i++) {
+      $name = $shtml->find('ul.cmn-list-product03', $i)->plaintext;
+      $aktris[] = [
+        'curr' => $curr,
+      ];
+    }
+    $fxf[] = [
+      'actress' => $aktris,
+      ];
+    echo "<pre>";
+    echo json_encode($fxf, JSON_PRETTY_PRINT);
+  }
   public function crypto() {
     echo "Data Crypto<br>";
     $id_coin = ['bitcoin',

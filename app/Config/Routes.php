@@ -36,13 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/cryptoliq', 'Home::crypto');
-$routes->get('/stocknews', 'Home::stocks');
-$routes->get('/forecast', 'Home::forecast');
-$routes->get('/analyst', 'Home::analyst');
-$routes->get('/fx_interest', 'Home::forex_interest');
-$routes->get('/forex_rates/(:any)', 'Home::forex_rates/$1');
-$routes->get('/fx_liquidity/', 'Home::fx_liquidity');
+$routes->get('/aktris', 'Home::actress');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
