@@ -11,6 +11,7 @@ class Home extends BaseController
     return view('hterm');
   }
   public function actress(){
+    $page ="3";
     $options = array(
       'http'=>array(
         'method'=>"GET",
@@ -25,7 +26,7 @@ class Home extends BaseController
     if(!file_exists($destdir)){
       mkdir($destdir);
     }
-    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=3');
+    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page='.$page);
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
       $namev = $shtml->find('div.txt01', $i)->plaintext;
