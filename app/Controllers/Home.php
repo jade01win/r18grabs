@@ -16,7 +16,7 @@ class Home extends BaseController
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
       $namev = $shtml->find('div.txt01', $i)->plaintext;
-      $name = str_replace(array("\r\n", "\r", "\n", "\t"," "), '  ', $namev);
+      $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
       $aktris[] = [
         'name' => $name,
       ];
