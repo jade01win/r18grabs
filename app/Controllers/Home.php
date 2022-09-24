@@ -19,7 +19,7 @@ class Home extends BaseController
       $namev = $shtml->find('div.txt01', $i)->plaintext;
       $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
       $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
-      $imgprv = urlencode(str_replace(array("https://",""), 'http://', $imgprvs));
+      $imgprv = str_replace(array("https://",""), 'www.', $imgprvs);
       $aktris[] = [
         'name' => $name,
         'imgprview' => $imgprv,
