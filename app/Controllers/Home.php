@@ -19,13 +19,13 @@ class Home extends BaseController
       $namev = $shtml->find('div.txt01', $i)->plaintext;
       $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
       $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
-      $imgprv = str_replace(array("https://",""), 'www.', $imgprvs);
+      // $imgprv = str_replace(array("https://",""), 'www.', $imgprvs);
       $aktris[] = [
         'name' => $name,
-        'imgprview' => $imgprv,
+        'imgprview' => $imgprvs,
       ];
-      $img=file_get_contents($imgprv);
-      file_put_contents($destdir.substr($imgprv, strrpos($imgprv,'/')), $img);
+      $img=file_get_contents($imgprvs);
+      file_put_contents($destdir.substr($imgprvs, strrpos($imgprvs,'/')), $img);
     }
     $fxf[] = [
       'actress' => $aktris,
