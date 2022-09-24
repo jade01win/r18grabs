@@ -15,7 +15,7 @@ class Home extends BaseController
     $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=1');
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
-      $name = $shtml->find('ul.cmn-list-product03 li', $i)->plaintext;
+      $name = $shtml->find('ul.cmn-list-product03 a', $i)->plaintext;
       $aktris[] = [
         'name' => $name,
       ];
