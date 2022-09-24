@@ -33,7 +33,7 @@ class Home extends BaseController
       $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
       $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
       $imgprv = str_replace(array("https://",""), 'http://', $imgprvs);
-      $linkact = "";
+      $linkact = $shtml->find('ul.cmn-list-product03 a', $i)->plaintext;
       $aktris[] = [
         'name' => $name,
         'imgprview' => $imgprvs,
