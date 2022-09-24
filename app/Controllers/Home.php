@@ -34,8 +34,8 @@ class Home extends BaseController
         'imgprview' => $imgprvs,
       ];
 
-      $img = file_get_contents($imgprvs, true, $context);
-      file_put_contents($destdir.substr($imgprvs, strrpos($imgprvs,'/')), $img);
+      echo $img = file_get_contents($imgprvs, true, $context);
+      // file_put_contents($destdir.substr($imgprvs, strrpos($imgprvs,'/')), $img);
     }
     $fxf[] = [
       'actress' => $aktris,
