@@ -18,7 +18,8 @@ class Home extends BaseController
     for ($i = 0; $i < 30; $i++) {
       $namev = $shtml->find('div.txt01', $i)->plaintext;
       $name = str_replace(array("\r\n", "\r", "\n", "\t",""), '', $namev);
-      $imgprv = $shtml->find('ul.cmn-list-product03 img', $i)->src;
+      $imgprvs = $shtml->find('ul.cmn-list-product03 img', $i)->src;
+      $imgprv = str_replace(array("https://","www"), '', $imgprvs);
       $aktris[] = [
         'name' => $name,
         'imgprview' => $imgprv,
