@@ -15,7 +15,7 @@ class Home extends BaseController
     $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/actress/?page=1');
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
-      $namev = $shtml->find('div.txt01', $i)->plaintext
+      $namev = $shtml->find('div.txt01', $i)->plaintext;
       $name = str_replace(array("\r\n", "\r", "\n", "\t"," "), '', $namev);
       $aktris[] = [
         'name' => $name,
