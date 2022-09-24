@@ -49,4 +49,8 @@ class Home extends BaseController
     echo "<pre>";
     echo json_encode($fxf, JSON_PRETTY_PRINT);
   }
+
+  public function limit_time(){
+    
+  }
 }
