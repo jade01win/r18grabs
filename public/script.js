@@ -20,7 +20,7 @@ const App = () => {
 };
 const Terminal = ({ theme, setTheme }) => {
   const [maximized, setMaximized] = React.useState(false);
-  const [title, setTitle] = React.useState('React Terminal');
+  const [title, setTitle] = React.useState('R18 Terminal');
   const handleClose = () => window.location.href = 'https://codepen.io/HuntingHawk';
   const handleMinMax = () => {
     setMaximized(!maximized);
