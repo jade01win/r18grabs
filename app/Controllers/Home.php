@@ -26,7 +26,7 @@ class Home extends BaseController
     if(!file_exists($destdir)){
       mkdir($destdir);
     }
-    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/list/?id=6565&type=category?page='.$page);
+    $res = $client->request('GET', 'https://www.r18.com/videos/vod/movies/list/?id=6565&type=category?page=2'.$page);
     $shtml = str_get_html($res->getBody());
     for ($i = 0; $i < 30; $i++) {
       // $namev = $shtml->find('li.item-list is-sale', $i)->plaintext;
